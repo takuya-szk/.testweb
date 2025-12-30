@@ -60,32 +60,21 @@ class Title
 
 function apply()
 {
-	// GASのurl
 	const url = "https://script.google.com/macros/s/AKfycbyQ0mg8nZlaMJU-VG42Kabg-QV8ihYADgP4hdiuvjXUSZnnVjuiijkhckUpcV-Pz1BrZA/exec";
-	const options = {
-	  method: "POST",
-	  headers: {
-	    "Content-Type": "application/json",
-	  },
-	  body: JSON.stringify({
-	    sheet: "シート1",
-	    cell: "A1",
-	    value: "test",
-	  }),
-	};
-	fetchData(url, options);
-	// alert("申請が完了しました！");
-}
 
-async function fetchData(url, options) 
-{
-  try 
-  {
-	const response = await fetch(url, options);
-	const data = await response.json();
-  } 
-  catch (error) 
-  {
-	console.error("Error:", error);
-  }
+	const requestParams = {
+	  method: "GET",
+	  headers: {
+	    "Accept": "application/json",
+	    "Content-Type": "application/x-www-form-urlencoded",
+	  },
+	};
+	
+	fetch(url, requestParams)
+	  .then((response) => response.json())
+	  .then((result) => {
+	    console.log(result); // {"status":"OK"}が返ってくる
+	  })
+	  .catch((e) => console.log(e));
+
 }
