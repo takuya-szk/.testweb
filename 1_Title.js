@@ -60,5 +60,32 @@ class Title
 
 function apply()
 {
-	alert("申請が完了しました！");
+	// GASのurl
+	const url = "https://script.google.com/macros/s/AKfycbyv-j3nv6qP0J4jayuIXH9WIGYbtz4k8dLV0bsJ2H4G-h4Y7HFQcPKoCjnacasUnkt0ig/exec";
+	const options = {
+	  method: "POST",
+	  headers: {
+	    "Content-Type": "application/json",
+	  },
+	  body: JSON.stringify({
+	    sheet: "シート1",
+	    cell: "A1",
+	    value: "test",
+	  }),
+	};
+	fetchData(url, options);
+	// alert("申請が完了しました！");
+}
+
+async function fetchData(url, options) 
+{
+  try 
+  {
+	const response = await fetch(url, options);
+	const data = await response.json();
+  } 
+  catch (error) 
+  {
+	console.error("Error:", error);
+  }
 }
